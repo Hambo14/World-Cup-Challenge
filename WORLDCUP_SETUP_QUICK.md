@@ -66,7 +66,7 @@ curl https://worldcup26.ir/get/games
 
 1. ✅ Run `npm run dev`
 2. ✅ Visit `http://localhost:3000`
-3. ✅ Click "Try Loading Matches"
+3. ✅ The page will automatically fetch match data from `/api/worldcup-matches`
 4. ✅ See real World Cup 2026 data!
 
 ---
