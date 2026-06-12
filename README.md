@@ -21,10 +21,7 @@ A World Cup Challenge leaderboard dashboard built with React and Next.js, ready 
 
 ## Getting Started
 
-### Prerequisites
-
-- Node.js 16+ and npm
-
+- Node.js 18.17+ and npm
 ### Installation
 
 1. Clone the repository:
