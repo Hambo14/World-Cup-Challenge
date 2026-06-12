@@ -11,7 +11,7 @@ export default function Leaderboard({ leaderboard }) {
       </thead>
       <tbody>
         {leaderboard.map((row, index) => (
-          <tr key={index}>
+          <tr key={row.player}>
             <td>{index + 1}</td>
             <td>{row.player}</td>
             <td>{row.points}</td>
