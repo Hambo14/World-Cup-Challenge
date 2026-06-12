@@ -13,7 +13,7 @@ const INITIAL_PLAYERS = [
 
 export default function Home() {
   const [matches, setMatches] = useState([]);
-  const [players, setPlayers] = useState(INITIAL_PLAYERS);
+  const [players] = useState(INITIAL_PLAYERS);
   const [apiOutput, setApiOutput] = useState('No API data loaded yet.');
 
   const handleAddMatch = (match) => {
