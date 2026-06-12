@@ -254,25 +254,11 @@ Common causes:
 
 ## 🔄 Using Real Match Data in Your App
 
-### Update `/app/page.js` to Use Real Data
+### App Integration
 
-```javascript
-const handleLoadApi = async () => {
-  setApiOutput('Loading World Cup 2026 matches...');
-  try {
-    const response = await fetch('/api/worldcup-matches');
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+`/app/page.js` already fetches `/api/worldcup-matches` on mount and refreshes periodically.
 
-    const data = await response.json();
-    setApiOutput(
-      `Loaded ${data.data.totalMatches} matches\n\n` +
-        JSON.stringify(data.data.matches.slice(0, 3), null, 2)
-    );
-  } catch (error) {
-    setApiOutput(`Error: ${error.message}`);
-  }
-};
-```
+If you prefer a manual fetch button instead of auto-refresh, you can adapt the same fetch logic into an `onClick` handler.
 
 ---
 
