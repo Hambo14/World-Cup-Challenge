@@ -65,7 +65,7 @@ export async function OPTIONS(request) {
   return new Response(null, {
     status: 200,
     headers: {
-      'Allow': 'GET, POST, OPTIONS',
+      'Allow': 'GET, OPTIONS',
     },
   });
 }
