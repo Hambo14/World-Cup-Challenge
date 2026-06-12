@@ -1,0 +1,22 @@
+{
+  "name": "world-cup-challenge",
+  "version": "1.0.0",
+  "description": "Front end dashboard and score tracker for the World Cup Challenge",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hambo14/World-Cup-Challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Hambo14/World-Cup-Challenge/issues"
+  },
+  "homepage": "https://github.com/Hambo14/World-Cup-Challenge#readme"
+}
