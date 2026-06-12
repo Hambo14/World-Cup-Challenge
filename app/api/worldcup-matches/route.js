@@ -1,58 +1,59 @@
-export async function GET(request) {
-  // Example API route for fetching World Cup match data
-  // This can be enhanced with real data from the World Cup 2026 API
+import { getMatches, getTeams } from '@/lib/worldcupAPI';
+import { mapAPIMatches } from '@/lib/worldcupMapper';
 
+/**
+ * GET /api/worldcup-matches
+ * Fetch matches from the public World Cup 2026 API
+ * No authentication required - this is a free public API
+ */
+export async function GET(request) {
   try {
+    // Fetch data from public World Cup 2026 API
+    const [matches, teams] = await Promise.all([
+      getMatches(),
+      getTeams(),
+    ]);
+
+    // Transform match data to app format
+    const formattedMatches = mapAPIMatches(matches);
+
     return Response.json({
-      message: 'World Cup API endpoint',
-      example: {
-        match: {
-          stage: 'pool',
-          homeTeam: 'Canada',
-          awayTeam: 'Belgium',
-          homeGoals: 1,
-          awayGoals: 2,
-          progressedTeams: ['Belgium'],
-        },
+      success: true,
+      message: 'World Cup 2026 matches data',
+      source: 'https://worldcup26.ir (FREE PUBLIC API)',
+      data: {
+        matches: formattedMatches,
+        teams: teams.length,
+        totalMatches: formattedMatches.length,
+        lastUpdated: new Date().toISOString(),
       },
     });
   } catch (error) {
+    console.error('Error fetching World Cup matches:', error);
+
     return Response.json(
-      { error: 'Failed to fetch match data' },
+      {
+        error: 'Failed to fetch World Cup data',
+        message: error.message,
+        note: 'The World Cup 2026 API may be temporarily unavailable. Check https://worldcup26.ir/get/games',
+      },
       { status: 500 }
     );
   }
 }
 
+/**
+ * POST /api/worldcup-matches
+ * Not used - matches are read-only from World Cup API
+ */
 export async function POST(request) {
-  // Example route for posting new match results
-  // You can enhance this with database operations
-
-  try {
-    const body = await request.json();
-
-    // Validate the match data
-    if (!body.stage || !body.homeTeam || !body.awayTeam) {
-      return Response.json(
-        { error: 'Missing required fields: stage, homeTeam, awayTeam' },
-        { status: 400 }
-      );
-    }
-
-    // Here you would typically save to a database
-    return Response.json(
-      {
-        message: 'Match result recorded',
-        match: body,
-      },
-      { status: 201 }
-    );
-  } catch (error) {
-    return Response.json(
-      { error: 'Failed to process match result' },
-      { status: 500 }
-    );
-  }
+  return Response.json(
+    {
+      error: 'Method not allowed',
+      message: 'Match data is read-only from World Cup 2026 API. POST is not supported.',
+    },
+    { status: 405 }
+  );
 }
 
 // Optional: Handle unsupported methods
