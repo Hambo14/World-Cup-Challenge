@@ -35,17 +35,15 @@ The remaining warnings are **not in your code** — they come from:
 
 - **ESLint 8.x** (required by Next.js 14)
 - **ESLint's dependencies** (inflight, rimraf, glob, etc.)
-- **Next.js's internal vulnerabilities** (DoS vectors in Image Optimization)
-
 ## ✅ Why This Is Safe
 
-| Concern               | Status                     |
-| --------------------- | -------------------------- |
-| Your code             | ✅ No vulnerabilities      |
-| App functionality     | ✅ Tested & working        |
-| Production deployment | ✅ Safe to deploy          |
-| Build process         | ✅ Succeeds without errors |
-| Dev server            | ✅ Works perfectly         |
+| Concern               | Status                                                     |
+| --------------------- | ---------------------------------------------------------- |
+| Your code             | ✅ No direct vulnerabilities identified                    |
+| App functionality     | ✅ Builds and runs                                          |
+| Production deployment | ⚠️ Review/mitigate reported dependency vulnerabilities     |
+| Build process         | ✅ Succeeds without errors                                  |
+| Dev server            | ✅ Works                                                    |
 
 ## 📈 Next Steps
 
