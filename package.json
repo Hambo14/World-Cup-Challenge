@@ -1,20 +1,33 @@
 {
   "name": "world-cup-challenge",
   "version": "1.0.0",
-  "description": "Front end dashboard and score tracker for the World Cup Challenge",
-  "main": "index.js",
+  "description": "World Cup Challenge Leaderboard Dashboard",
+  "private": true,
   "scripts": {
-    "start": "node server.js",
-    "test": "node --test"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "jest"
+  },
+  "dependencies": {
+    "next": "^14.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "axios": "^1.6.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^14.1.0",
+    "@testing-library/jest-dom": "^6.1.5",
+    "jest": "^30.0.0",
+    "jest-environment-jsdom": "^30.0.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^14.0.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Hambo14/World-Cup-Challenge.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/Hambo14/World-Cup-Challenge/issues"
   },
