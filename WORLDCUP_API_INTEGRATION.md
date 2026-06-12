@@ -184,8 +184,8 @@ curl http://localhost:3000/api/worldcup-setup | jq
 
 Response indicates:
 
-- ✅ `"configured": true` - API is ready
-- ❌ `"configured": false` - Missing credentials
+- ✅ "configured": true - API is reachable
+- ❌ "configured": false - API unreachable or misconfigured (check WORLDCUP_API_URL)
 
 ### Test the Matches Endpoint
 
