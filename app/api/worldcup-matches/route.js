@@ -1,30 +1,34 @@
 import { getMatches, getTeams } from '@/lib/worldcupAPI';
-import { mapAPIMatches } from '@/lib/worldcupMapper';
 
 /**
  * GET /api/worldcup-matches
- * Fetch matches from the public World Cup 2026 API
+ * Fetch raw matches from the public World Cup 2026 API
  * No authentication required - this is a free public API
  */
 export async function GET(request) {
   try {
-    // Fetch data from public World Cup 2026 API
-    const [matches, teams] = await Promise.all([
-      getMatches(),
-      getTeams(),
-    ]);
+    // Fetch raw data from public World Cup 2026 API
+    const matches = await getMatches();
 
-    // Transform match data to app format
-    const formattedMatches = mapAPIMatches(matches);
+    if (!matches || matches.length === 0) {
+      return Response.json({
+        success: true,
+        message: 'No matches found',
+        data: {
+          matches: [],
+          totalMatches: 0,
+          lastUpdated: new Date().toISOString(),
+        },
+      });
+    }
 
     return Response.json({
       success: true,
       message: 'World Cup 2026 matches data',
       source: 'https://worldcup26.ir (FREE PUBLIC API)',
       data: {
-        matches: formattedMatches,
-        teams: teams.length,
-        totalMatches: formattedMatches.length,
+        matches: matches,
+        totalMatches: matches.length,
         lastUpdated: new Date().toISOString(),
       },
     });
