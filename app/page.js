@@ -17,7 +17,7 @@ export default function Home() {
   const [apiOutput, setApiOutput] = useState('No API data loaded yet.');
 
   const handleAddMatch = (match) => {
-    setMatches([...matches, match]);
+    setMatches((prev) => [...prev, match]);
   };
 
   const handleLoadApi = async () => {
