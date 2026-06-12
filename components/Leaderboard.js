@@ -1,3 +1,5 @@
+import { formatTeamsWithFlags } from '@/lib/countryFlags';
+
 export default function Leaderboard({ leaderboard }) {
   return (
     <table>
@@ -5,8 +7,8 @@ export default function Leaderboard({ leaderboard }) {
         <tr>
           <th>Rank</th>
           <th>Player</th>
-          <th>Points</th>
           <th>Teams</th>
+          <th>Points</th>
         </tr>
       </thead>
       <tbody>
@@ -14,8 +16,8 @@ export default function Leaderboard({ leaderboard }) {
           <tr key={row.player}>
             <td>{index + 1}</td>
             <td>{row.player}</td>
+            <td>{formatTeamsWithFlags(row.teams)}</td>
             <td>{row.points}</td>
-            <td>{row.teams.join(' + ')}</td>
           </tr>
         ))}
       </tbody>
