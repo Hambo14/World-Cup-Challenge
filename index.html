@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>World Cup Challenge Leaderboard</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>World Cup Challenge Leaderboard</h1>
+      <p>Track points based on pool-stage and knockout-stage results.</p>
+
+      <section>
+        <h2>Add Match Result</h2>
+        <form id="match-form">
+          <label>
+            Stage
+            <select name="stage" required>
+              <option value="pool">Pool Stage</option>
+              <option value="round-of-32">Round of 32</option>
+              <option value="round-of-16">Round of 16</option>
+              <option value="quarter-final">Quarter Final</option>
+              <option value="semi-final">Semi Final</option>
+              <option value="final">Final</option>
+            </select>
+          </label>
+          <label>Home Team <input name="homeTeam" required /></label>
+          <label>Away Team <input name="awayTeam" required /></label>
+          <label>Home Goals <input name="homeGoals" type="number" min="0" required /></label>
+          <label>Away Goals <input name="awayGoals" type="number" min="0" required /></label>
+          <label>Progressed Teams (comma-separated) <input name="progressedTeams" placeholder="Canada, Brazil" /></label>
+          <button type="submit">Add Result</button>
+        </form>
+      </section>
+
+      <section>
+        <h2>Leaderboard</h2>
+        <table>
+          <thead>
+            <tr><th>Rank</th><th>Player</th><th>Points</th><th>Teams</th></tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>WorldCup2026 API Starter</h2>
+        <button id="load-api" type="button">Try Loading Matches</button>
+        <pre id="api-output">No API data loaded yet.</pre>
+      </section>
+    </main>
+
+    <script src="/src/data.js"></script>
+    <script src="/src/scoring.js"></script>
+    <script src="/src/api.js"></script>
+    <script src="/src/app.js"></script>
+  </body>
+</html>
