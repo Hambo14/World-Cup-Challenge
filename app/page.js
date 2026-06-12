@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import MatchForm from '@/components/MatchForm';
 import Leaderboard from '@/components/Leaderboard';
 import { calculateLeaderboard } from '@/lib/scoring';
