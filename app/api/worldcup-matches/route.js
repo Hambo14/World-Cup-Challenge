@@ -1,4 +1,4 @@
-import { getMatches, getTeams } from '@/lib/worldcupAPI';
+import { getMatches } from '@/lib/worldcupAPI';
 
 /**
  * GET /api/worldcup-matches
