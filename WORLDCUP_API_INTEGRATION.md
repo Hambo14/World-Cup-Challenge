@@ -197,8 +197,8 @@ Should return array of matches with real World Cup 2026 data.
 ### Verify in App
 
 1. Go to http://localhost:3000
-2. Click "Try Loading Matches"
-3. Should display real World Cup 2026 match data
+2. The page will automatically load matches from `/api/worldcup-matches`
+3. The leaderboard should update once completed matches are available
 
 ---
 
