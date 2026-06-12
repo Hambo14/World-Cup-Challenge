@@ -80,8 +80,7 @@ curl http://localhost:3000/api/worldcup-setup
 
 ### Match Object
 
-The API returns matches in this format:
-
+After fetching from `/api/worldcup-matches` and transforming with `transformAPIMatches`, the app uses matches in this format:
 ```javascript
 {
   "id": "1",
