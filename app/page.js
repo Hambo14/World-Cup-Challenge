@@ -1,58 +1,77 @@
 'use client';
 
-import { useState } from 'react';
-import MatchForm from '@/components/MatchForm';
+import { useState, useEffect } from 'react';
 import Leaderboard from '@/components/Leaderboard';
 import { calculateLeaderboard } from '@/lib/scoring';
-
-const INITIAL_PLAYERS = [
-  { name: 'Player 1', teams: [] },
-  { name: 'Player 2', teams: [] },
-  { name: 'Player 3', teams: [] },
-];
+import { PLAYERS } from '@/lib/players';
+import { transformAPIMatches } from '@/lib/matchTransformer';
 
 export default function Home() {
   const [matches, setMatches] = useState([]);
-  const [players] = useState(INITIAL_PLAYERS);
-  const [apiOutput, setApiOutput] = useState('No API data loaded yet.');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [lastUpdate, setLastUpdate] = useState(null);
 
-  const handleAddMatch = (match) => {
-    setMatches((prev) => [...prev, match]);
-  };
+  // Fetch API data automatically on component mount
+  useEffect(() => {
+    const fetchMatches = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-  const handleLoadApi = async () => {
-    setApiOutput('Loading from worldcup2026 starter API...');
-    try {
-      // Example API call - replace with actual endpoint
-      const response = await fetch('/api/worldcup-matches');
-      const data = await response.json();
-      setApiOutput(JSON.stringify(data, null, 2).slice(0, 2000));
-    } catch (error) {
-      setApiOutput(`Error loading API: ${error.message}`);
-    }
-  };
+        const response = await fetch('/api/worldcup-matches');
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`);
+        }
 
-  const leaderboard = calculateLeaderboard(players, matches);
+        const data = await response.json();
+        if (data.success && data.data && data.data.matches) {
+          const transformedMatches = await transformAPIMatches(data.data.matches);
+          setMatches(transformedMatches);
+          setLastUpdate(new Date().toLocaleTimeString());
+        } else {
+          throw new Error('Invalid API response format');
+        }
+      } catch (err) {
+        setError(`Failed to load matches: ${err.message}`);
+        console.error('API Error:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMatches();
+
+    // Refresh data every 30 seconds (only while the tab is visible)
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') fetchMatches();
+    }, 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const leaderboard = calculateLeaderboard(PLAYERS, matches);
 
   return (
     <main>
-      <h1>World Cup Challenge Leaderboard</h1>
-      <p>Track points based on pool-stage and knockout-stage results.</p>
+      <h1>World Cup Challenge Leaderboard 🏆</h1>
+      <p>Live scoring from World Cup 2026 matches.</p>
 
-      <section>
-        <h2>Add Match Result</h2>
-        <MatchForm onAddMatch={handleAddMatch} />
-      </section>
+      {loading && <p className="status">Loading matches...</p>}
+      {error && <p className="error">{error}</p>}
+      {lastUpdate && !loading && <p className="status">Last updated: {lastUpdate}</p>}
 
       <section>
         <h2>Leaderboard</h2>
-        <Leaderboard leaderboard={leaderboard} />
-      </section>
-
-      <section>
-        <h2>WorldCup2026 API Starter</h2>
-        <button onClick={handleLoadApi}>Try Loading Matches</button>
-        <pre>{apiOutput}</pre>
+        {matches.length > 0 ? (
+          <>
+            <p className="match-count">
+              {matches.length} matches completed • {PLAYERS.length} players
+            </p>
+            <Leaderboard leaderboard={leaderboard} />
+          </>
+        ) : (
+          <p>Waiting for World Cup matches to be played...</p>
+        )}
       </section>
     </main>
   );
