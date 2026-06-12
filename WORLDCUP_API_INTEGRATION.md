@@ -132,29 +132,14 @@ The API returns matches in this format:
 
 Edit `.env.local` for these options:
 
-````env
-# World Cup API URL (default: https://worldcup26.ir)
-WORLDCUP_API_URL=https://worldcup26.ir
+    # World Cup API URL (default: https://worldcup26.ir)
+    WORLDCUP_API_URL=https://worldcup26.ir
 
-# Cache duration in seconds (default: 3600)
----
+    # Cache duration in seconds (default: 3600 = 1 hour)
+    WORLDCUP_CACHE_DURATION=3600
 
-## ⚙️ Advanced Configuration
-
-### Environment Variables
-
-Edit `.env.local` for these options:
-
-```env
-# World Cup API URL (default: https://worldcup26.ir)
-WORLDCUP_API_URL=https://worldcup26.ir
-
-# Cache duration in seconds (default: 3600 = 1 hour)
-WORLDCUP_CACHE_DURATION=3600
-
-# Enable debug logging (default: false)
-WORLDCUP_API_DEBUG=false
-````
+    # Enable debug logging (default: false)
+    WORLDCUP_API_DEBUG=false
 
 ### Caching
 
