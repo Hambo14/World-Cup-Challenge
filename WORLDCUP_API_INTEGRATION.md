@@ -267,7 +267,7 @@ If you prefer a manual fetch button instead of auto-refresh, you can adapt the s
 After setup:
 
 1. ✅ **Verify API connection** - Check `/api/worldcup-setup`
-2. ✅ **Load real data** - Click "Try Loading Matches" in app
+2. ✅ **Load real data** - Open the app and it will fetch `/api/worldcup-matches` automatically
 3. ✅ **Map teams to players** - Create player-to-team associations
 4. ✅ **Calculate scores** - Use scoring logic with real match data
 5. ✅ **Deploy to Vercel** - Set environment variables in Vercel dashboard
