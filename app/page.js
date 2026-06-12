@@ -42,8 +42,10 @@ export default function Home() {
 
     fetchMatches();
 
-    // Refresh data every 30 seconds
-    const interval = setInterval(fetchMatches, 30000);
+    // Refresh data every 30 seconds (only while the tab is visible)
+    const interval = setInterval(() => {
+      if (document.visibilityState === 'visible') fetchMatches();
+    }, 30000);
     return () => clearInterval(interval);
   }, []);
 
