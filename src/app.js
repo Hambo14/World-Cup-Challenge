@@ -16,7 +16,7 @@
     leaderboardBody.innerHTML = leaderboard
       .map(
         (row, index) =>
-          `<tr><td>${index + 1}</td><td>${row.player}</td><td>${row.points} (${formatGoalDifference(row.goalDifference || 0)})</td><td>${row.teams.join(' + ')}</td></tr>`
+          `<tr><td>${index + 1}</td><td>${row.player}</td><td>${row.points} (${formatGoalDifference(row.goalDifference)})</td><td>${row.teams.join(' + ')}</td></tr>`
       )
       .join('');
   }

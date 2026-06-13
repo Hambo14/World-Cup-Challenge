@@ -20,7 +20,7 @@ export default function Leaderboard({ leaderboard }) {
             <td>{row.player}</td>
             <td>{formatTeamsWithFlags(row.teams)}</td>
             <td>
-              {row.points} ({formatGoalDifference(row.goalDifference || 0)})
+              {row.points} ({formatGoalDifference(row.goalDifference)})
             </td>
           </tr>
         ))}
