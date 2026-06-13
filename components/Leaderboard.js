@@ -1,6 +1,8 @@
 import { formatTeamsWithFlags } from '@/lib/countryFlags';
 
 export default function Leaderboard({ leaderboard }) {
+  const formatGoalDifference = (goalDifference) => (goalDifference >= 0 ? `+${goalDifference}` : `${goalDifference}`);
+
   return (
     <table>
       <thead>
@@ -17,7 +19,9 @@ export default function Leaderboard({ leaderboard }) {
             <td>{index + 1}</td>
             <td>{row.player}</td>
             <td>{formatTeamsWithFlags(row.teams)}</td>
-            <td>{row.points}</td>
+            <td>
+              {row.points} ({formatGoalDifference(row.goalDifference)})
+            </td>
           </tr>
         ))}
       </tbody>
